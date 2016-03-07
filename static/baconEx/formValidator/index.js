@@ -1,11 +1,16 @@
 /* @flow */
 
+// $FlowFixMe: >_<
 import $ from 'jquery';
+// $FlowFixMe: >_<
 import Bacon from 'baconjs';
+// $FlowFixMe: >_<
 import bj from 'bacon.jquery';
+// $FlowFixMe: >_<
 import bm from 'bacon.model';
 // $FlowFixMe: >_<
 import html from './index.tpl!'
+
 import render from '../../playground/render';
 render(html);
 

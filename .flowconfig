@@ -1,6 +1,6 @@
 [ignore]
-./bacon/**/*
-./node_modules/**/*
+.*bacon\/.*
+.*node_modules.*
 
 [include]
 
