@@ -21,7 +21,7 @@ let Loader = class extends React.Component {
             type: dynamics.easeInOut,
             duration: 400,
             friction: 700,
-            complete: function() {
+            complete: () => {
                 dynamics.animate(this.refs.line, {
                     strokeDasharray: "120, 37"
                 }, {
