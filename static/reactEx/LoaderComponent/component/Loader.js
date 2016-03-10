@@ -32,10 +32,24 @@ let Loader = class extends React.Component {
             }
         })
     }
+    _rotate() {
+        dynamics.animate(this.refs.background, {
+            rotateZ: 180,
+            rotateC: 60
+        }, {
+            type: dynamics.linear,
+            duration: 500,
+            complete: () => {
+                dynamics.css(this.refs.background, { rotateZ: 0 });
+                this._rotate();
+            }
+        })
+    }
     componentDidMount() {
         this._animate();
+        this._rotate();
     }
-    
+
     render() {
         const spinnerStyle= {
             position: 'absolute',
@@ -67,7 +81,7 @@ let Loader = class extends React.Component {
                         <circle cx="60" cy="60" r="55"/>
                     </clipPath>
                 </defs>
-                <g className="background">
+                <g ref="background" className="background">
                     <g transform="translate(120, 0) scale(-1, 1)">
                         <circle ref="line" style={lineStyle} cx="60" cy="60" r="50" clipPath="url(#clipPath)"/>
                         <g transform="translate(95, 45)">
