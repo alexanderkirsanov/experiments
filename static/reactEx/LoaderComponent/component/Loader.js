@@ -15,7 +15,49 @@ let Loader = class extends React.Component {
             complete: this._animateLine.bind(this)
         });
     }
+    _animateSuccess() {
+        const complete = function() {
+            // Then we change the line color and make it a full circle
+            // by increasing the strokeWidth
+            dynamics.animate(this.refs.line, {
+                strokeWidth: 100,
+                stroke: "#0AB000"
+            }, {
+                friction: 200,
+                duration: 300
+            });
 
+            // // We hide the arrows
+            dynamics.animate([this.refs.arrow1,this.refs.arrow2], {
+                fill: "#0AB000",
+                translate: 5.5,
+                scale: 0.5
+            }, {
+                friction: 200,
+                duration: 300
+            });
+
+            // Animate the tick icon
+            dynamics.animate(this.refs.tick, {
+                opacity: 1,
+                rotateZ: 0,
+                rotateC: 60
+            }, {
+                type: dynamics.spring,
+                friction: 300,
+                duration: 1000,
+                delay: 300
+            });
+        }.bind(this);
+        dynamics.animate(this.refs.line, {
+            strokeDasharray: '157, 0'
+        }, {
+            type: dynamics.easeIn,
+            duration: 500,
+            friction: 200,
+            complete: complete
+        })
+    }
     _animateLine() {
         dynamics.animate(this.refs.line, {
             strokeDasharray: "40, 117"
@@ -61,7 +103,9 @@ let Loader = class extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         console.log(prevProps);
     }
-
+    done(){
+        this._animateSuccess();
+    }
     render() {
         const spinnerStyle = {
             position: 'absolute',
@@ -97,14 +141,14 @@ let Loader = class extends React.Component {
                     <g transform="translate(120, 0) scale(-1, 1)">
                         <circle ref="line" style={lineStyle} cx="60" cy="60" r="50" clipPath="url(#clipPath)"/>
                         <g transform="translate(95, 45)">
-                            <path style={arrowStyle} d="M1 16L14.2 0l13.2 15.8H1z"/>
+                            <path ref="arrow1" style={arrowStyle} d="M1 16L14.2 0l13.2 15.8H1z"/>
                         </g>
                         <g transform="translate(25, 75) rotate(180)">
-                            <path style={arrowStyle} d="M1 16L14.2 0l13.2 15.8H1z"/>
+                            <path ref="arrow2" style={arrowStyle} d="M1 16L14.2 0l13.2 15.8H1z"/>
                         </g>
                     </g>
                 </g>
-                <g style={tickStyle} transform="rotate(-45, 60, 60)">
+                <g ref="tick" style={tickStyle} transform="rotate(-45, 60, 60)">
                     <path fill="white"
                           d="M17.977 35.553L0 16.276l5.112-4.768 17.727 19.01L52.31 0l4.93 4.76L22.83 40.39l-.316-.305-.168.156-2.98-3.194-1.465-1.416.074-.077z"
                           transform="translate(28, 40) scale(1.15)" fill-rule="evenodd"/>

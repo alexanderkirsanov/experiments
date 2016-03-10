@@ -8,12 +8,12 @@ let App = class extends React.Component {
         super(props);
     }
     _handleClick (){
-        console.log('e');
+        this.refs.loader.done();
     }
     render() {
         return (<div>
-            <Loader ref="loader" mode="wait"/>
-            <SimpleButton handleClick={this._handleClick} text="click me"/>
+            <Loader ref='loader' mode='wait'/>
+            <SimpleButton handleClick={this._handleClick.bind(this)} text='click me'/>
         </div>);
     }
 };
