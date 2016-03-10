@@ -2,9 +2,10 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import dynamics from 'dynamics.js';
 let Loader = class extends React.Component {
-    constructor(){
-        super();
+    constructor(props) {
+        super(props);
     }
+
     _animate() {
         var el = ReactDOM.findDOMNode(this);
         dynamics.animate(el, {
@@ -14,6 +15,7 @@ let Loader = class extends React.Component {
             complete: this._animateLine.bind(this)
         });
     }
+
     _animateLine() {
         dynamics.animate(this.refs.line, {
             strokeDasharray: "40, 117"
@@ -32,6 +34,7 @@ let Loader = class extends React.Component {
             }
         })
     }
+
     _rotate() {
         dynamics.animate(this.refs.background, {
             rotateZ: 180,
@@ -40,18 +43,27 @@ let Loader = class extends React.Component {
             type: dynamics.linear,
             duration: 500,
             complete: () => {
-                dynamics.css(this.refs.background, { rotateZ: 0 });
+                dynamics.css(this.refs.background, {rotateZ: 0});
                 this._rotate();
             }
         })
     }
+
     componentDidMount() {
         this._animate();
         this._rotate();
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.mode !== this.props.mode;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log(prevProps);
+    }
+
     render() {
-        const spinnerStyle= {
+        const spinnerStyle = {
             position: 'absolute',
             top: '50%',
             left: '50%',
@@ -93,10 +105,15 @@ let Loader = class extends React.Component {
                     </g>
                 </g>
                 <g style={tickStyle} transform="rotate(-45, 60, 60)">
-                    <path fill="white" d="M17.977 35.553L0 16.276l5.112-4.768 17.727 19.01L52.31 0l4.93 4.76L22.83 40.39l-.316-.305-.168.156-2.98-3.194-1.465-1.416.074-.077z" transform="translate(28, 40) scale(1.15)" fill-rule="evenodd"/>
+                    <path fill="white"
+                          d="M17.977 35.553L0 16.276l5.112-4.768 17.727 19.01L52.31 0l4.93 4.76L22.83 40.39l-.316-.305-.168.156-2.98-3.194-1.465-1.416.074-.077z"
+                          transform="translate(28, 40) scale(1.15)" fill-rule="evenodd"/>
                 </g>
             </svg>
         );
     }
+};
+Loader.propTypes = {
+    mode: React.PropTypes.oneOf(['wait', 'done']).isRequired
 };
 export default Loader;
