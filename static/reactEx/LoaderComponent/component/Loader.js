@@ -4,6 +4,7 @@ import dynamics from 'dynamics.js';
 let Loader = class extends React.Component {
     constructor(props) {
         super(props);
+        this.__isDone = false;
     }
 
     _animate() {
@@ -86,7 +87,9 @@ let Loader = class extends React.Component {
             duration: 500,
             complete: () => {
                 dynamics.css(this.refs.background, {rotateZ: 0});
-                this._rotate();
+                if (!this.__isDone){
+                    this._rotate();
+                }
             }
         })
     }
@@ -105,6 +108,7 @@ let Loader = class extends React.Component {
     }
     done(){
         this._animateSuccess();
+        this.__isDone = true;
     }
     render() {
         const spinnerStyle = {
