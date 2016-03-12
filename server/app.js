@@ -5,6 +5,7 @@ const Koa = require('koa');
 const app = new Koa();
 const send = require('koa-send');
 const fs = require('fs');
+const url = require('url');
 
 const isDependency = path => path.indexOf('node_modules') !== -1 || path.indexOf('package.json') !== -1;
 const isDirectory = file => fs.statSync(file).isDirectory();
@@ -16,7 +17,10 @@ const list = (path) => {
     const fiddles = children.filter(isFiddle);
     return [].concat(fiddles, children.map(list).reduce((xs, x) => xs.concat(x), []));
 };
-
+const getContent = (path) => {
+    const project = path ? path.split('=')[1] : '';
+    return {project:project};
+};
 const getFiddles = () => {
     const root = __dirname + '/../static';
     return list(root).map(l => l.substring(root.length + 1));
@@ -38,6 +42,8 @@ app.use(async ctx => {
         return ctx.body = getFiddles()
             .map(name => `<li><a href="/index.html?folder=${name}">${name}</a>`)
             .join('');
+    } else if(ctx.path.startsWith('/source')) {
+        return ctx.body = getContent(url.parse(ctx.url).query);
     }
     await send(ctx, 'static' + ctx.path);
 });

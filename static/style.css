@@ -1,0 +1,9 @@
+.container{
+    display: flex;
+}
+.playground{
+    flex: 3;
+}
+.source {
+    flex: 1;
+}

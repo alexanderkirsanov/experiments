@@ -16,3 +16,5 @@ const path = pathProcessing(result.folder);
 System.import(path).catch((errorMessage) => {
     console.error(errorMessage);
 });
+const source = './source?project=' + path;
+fetch(source).then(x=>x.json()).then(x =>console.log(x));
