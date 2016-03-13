@@ -30,6 +30,7 @@
     }
   },
   "dependencies": {
+    "alt": "^0.18.2",
     "babel-core": "^6.6.5",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-3": "^6.5.0",
