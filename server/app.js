@@ -6,7 +6,7 @@ const app = new Koa();
 const send = require('koa-send');
 const fs = require('fs');
 const url = require('url');
-const path = require('path');
+const pathUtil = require('path');
 
 const isDependency = path => path.indexOf('node_modules') !== -1 || path.indexOf('package.json') !== -1;
 const isDirectory = file => fs.statSync(file).isDirectory();
@@ -20,7 +20,7 @@ const list = (path) => {
 };
 const fileList = (dir) => {
     return fs.readdirSync(dir).reduce(function (list, file) {
-        var name = path.join(dir, file);
+        var name = pathUtil.join(dir, file);
         var isDir = fs.statSync(name).isDirectory();
         return list.concat(isDir ? fileList(name) : [name]);
     }, []);
@@ -32,7 +32,7 @@ const getContent = async(ctx, path) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve({file: file, data: data})
+                    resolve({file: pathUtil.relative(__dirname + '/../static/' + project, file), data: data})
                 }
             });
         })

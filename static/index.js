@@ -1,4 +1,5 @@
 const qs = require('qs');
+const su = require('./playground/source');
 const result = qs.parse(document.location.search.substring(1));
 
 const pathProcessing = (folder) => {
@@ -17,4 +18,9 @@ System.import(path).catch((errorMessage) => {
     console.error(errorMessage);
 });
 const source = './source?project=' + path;
-fetch(source).then(x=>x.json()).then(x =>console.log(x));
+const realPath = path.replace('/index', '');
+console.log(realPath);
+const sourceEl = document.getElementById('source');
+sourceEl.innerHTML = '';
+const renderSource = su.compose(su.render(sourceEl), su.block, su.record(realPath));
+fetch(source).then(x=>x.json()).then(result => result.forEach(renderSource));
