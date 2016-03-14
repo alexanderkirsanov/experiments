@@ -33,7 +33,7 @@ class TodoStore {
     }
 
     onToggleComplete(id) {
-        const complete = !this.todos[id].complete;
+        const complete = this.todos.filter(todo => (todo.id === id  && todo.complete));
         this.update(id, {complete});
     }
 

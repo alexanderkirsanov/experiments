@@ -37,6 +37,7 @@
     "bacon.jquery": "^0.4.12",
     "bacon.model": "^0.1.12",
     "baconjs": "^0.7.83",
+    "classnames": "^2.2.3",
     "dynamics.js": "0.0.9",
     "hammerjs": "^2.0.6",
     "jquery": "^2.2.1",
