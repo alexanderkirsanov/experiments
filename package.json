@@ -22,7 +22,8 @@
     "npmAlgorithm": "flat",
     "map": {
       "./tpl": "./loaders/html",
-      "bacon": "./node_modules/baconjs/dist/Bacon"
+      "bacon": "./node_modules/baconjs/dist/Bacon",
+      "alt": "./node_modules/alt/dist/alt"
     },
     "transpiler": "babel",
     "babelOptions": {

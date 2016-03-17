@@ -1,10 +1,10 @@
 import React from 'react';
 
-// import TodoStore from '../stores/TodoStore';
+import TodoStore from '../store/TodoStore';
 //
-// import Header from './Header.react';
-// import MainSection from './MainSection.react';
-// import Footer from './Footer.react';
+import Header from './Header.react';
+import MainSection from './MainSection.react';
+import Footer from './Footer.react';
 
 function getTodoState() {
     return {
