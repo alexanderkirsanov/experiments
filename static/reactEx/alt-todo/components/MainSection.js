@@ -1,4 +1,4 @@
-import {PropTypes} from 'react';
+import React from 'react';
 import TodoItem from './TodoItem';
 
 const MainSection = (props) => {
@@ -10,7 +10,7 @@ const MainSection = (props) => {
     </ul>)
 };
 MainSection.propTypes = {
-    todos: PropTypes.object.isRequired
+    todos: React.PropTypes.array.isRequired
 };
 
 export default MainSection;

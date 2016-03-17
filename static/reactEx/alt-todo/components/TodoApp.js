@@ -1,10 +1,11 @@
 import React from 'react';
 
 import TodoStore from '../store/TodoStore';
-//
-import Header from './Header.react';
-import MainSection from './MainSection.react';
-import Footer from './Footer.react';
+import TodoActions from '../actions/TodoActions';
+
+import Header from './Header';
+import MainSection from './MainSection';
+import Footer from './Footer';
 
 function getTodoState() {
     return {
@@ -31,15 +32,24 @@ class TodoApp extends React.Component {
     render() {
         return (
             <div className='container'>
-                <Header />
-                <MainSection todos={ this.state.allTodos } />
-                <Footer areAnyComplete={ this.state.areAnyComplete } />
+                <Header onSave={this._onSave.bind(this)}/>
+                <MainSection todos={ this.state.allTodos }/>
+                <Footer clearAllCompleted={this._clearAllCompleted.bind(this)}
+                        areAnyComplete={ this.state.areAnyComplete }/>
             </div>
         );
     }
 
+    _onSave(newTodo) {
+        TodoActions.create(newTodo);
+    }
+
     _onChange() {
         this.setState(getTodoState());
+    }
+
+    _clearAllCompleted() {
+        TodoActions.clearComplete();
     }
 }
 
