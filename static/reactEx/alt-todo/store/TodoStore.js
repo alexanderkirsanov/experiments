@@ -12,8 +12,8 @@ class TodoStore {
 
     update(id, update) {
         const todo = this.todos.filter(todo => todo.id === id);
-        if (todo) {
-            merge(todo, update);
+        if (todo.length > 0) {
+            merge(todo[0], update);
         } else {
             this.todos.push(update);
         }
@@ -33,7 +33,7 @@ class TodoStore {
     }
 
     onToggleComplete(id) {
-        const complete = this.todos.filter(todo => (todo.id === id  && todo.complete));
+        const complete = !this.todos.filter(todo => (todo.id === id))[0].complete;
         this.update(id, {complete});
     }
 
