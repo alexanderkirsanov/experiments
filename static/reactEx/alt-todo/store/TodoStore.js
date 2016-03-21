@@ -38,7 +38,7 @@ class TodoStore {
     }
 
     onClearComplete() {
-        this.todos = this.todos.filter(todo=>todo.complete)
+        this.todos = this.todos.filter(todo=>!todo.complete);
     }
 
     static areAnyComplete() {
