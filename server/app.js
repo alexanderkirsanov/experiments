@@ -57,7 +57,7 @@ app.use(async(ctx) => {
         return await send(ctx, ctx.path, {root: __dirname + '/..'});
     } else if (ctx.path === '/' || ctx.path.startsWith('/list')) {
         return ctx.body = getFiddles()
-            .map(name => `<li><a href="/index.html?folder=${name}">${name}</a>`)
+            .map(name => `<li><a href="./index.html?folder=${name}">${name}</a>`)
             .join('');
     } else if (ctx.path.startsWith('/source')) {
         await getContent(ctx, url.parse(ctx.url).query);

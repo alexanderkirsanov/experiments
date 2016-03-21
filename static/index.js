@@ -19,7 +19,6 @@ System.import(path).catch((errorMessage) => {
 });
 const source = './source?project=' + path;
 const realPath = path.replace('/index', '');
-console.log(realPath);
 const sourceEl = document.getElementById('source');
 sourceEl.innerHTML = '';
 const renderSource = su.compose(su.render(sourceEl), su.block, su.record(realPath));
