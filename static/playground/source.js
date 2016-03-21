@@ -14,7 +14,7 @@ const escapeHtml = (string) => {
 };
 const block = (arg) => `<div class = 'block'> ${arg}</div>`;
 const record = (realPath) => (json) => `<div class ='filename'> ${json.file.replace(realPath, '')} </div>
-     <div class = 'record'>${escapeHtml(json.data)}</div>`;
+     <textarea cols="30" rows="30" class = 'record'>${escapeHtml(json.data)}</textarea>`;
 
 const render = (el) => (data) => el.innerHTML += data;
 
