@@ -23,7 +23,8 @@
     "map": {
       "./tpl": "./loaders/html",
       "bacon": "./node_modules/baconjs/dist/Bacon",
-      "alt": "./node_modules/alt/dist/alt"
+      "alt": "./node_modules/alt/dist/alt",
+      "natural@0.4.0#lib/natural/transliterators/ja": "natural/lib/natural/transliterators/ja/index.js"
     },
     "transpiler": "babel",
     "babelOptions": {
@@ -44,6 +45,7 @@
     "jquery": "^2.2.1",
     "koa": "^2.0.0-alpha.3",
     "koa-send": "^3.1.1",
+    "natural": "^0.4.0",
     "object-assign": "^4.0.1",
     "qs": "^6.1.0",
     "react": "^0.14.7",
