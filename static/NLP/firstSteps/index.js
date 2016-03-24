@@ -1,4 +1,8 @@
+import ReactDOM from 'react-dom';
+import React from 'react';
 import bayes from 'bayes'
+import ReactTranscriber from 'react-transcriber';
+
 const classifier = bayes();
 classifier.learn('open profile', 'profile');
 classifier.learn('show profile', 'profile');
@@ -15,3 +19,8 @@ console.log(classifier.categorize('search profile near me'));
 console.log(classifier.categorize('search hco'));
 console.log(classifier.categorize('open dashboard'));
 console.log(classifier.categorize('hi'));
+var test = (...arg) => {
+    console.log(arg);
+    console.log(classifier.categorize(arg[arg.length - 1].toLowerCase()));
+};
+ReactDOM.render(<ReactTranscriber onTranscription={test.bind(this, 'standard')}/>, document.getElementById('playground'));
